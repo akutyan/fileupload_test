@@ -10,7 +10,7 @@ export default function Dropzone() {
   const onDrop = useCallback(
     (acceptedFiles) => {
       console.log("-2-");
-      console.log(updateFiles);
+      console.log(typeof updateFiles);
       const onFileAccepted = () => {
         // const updatedFiles = acceptedFiles;
 
