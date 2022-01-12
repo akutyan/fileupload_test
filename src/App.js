@@ -58,14 +58,27 @@ export default function Dropzone() {
 
   const files = useMemo(
     () =>
-      updateFiles.map((file) => (
+      updateFiles.map((file, index) => (
         <li key={file.path}>
-          {file.path} - {file.size} bytes
-          <button>削除</button>
+          ({index}){file.path} - {file.size} bytes
+          <button onClick={() => onClickDelete(index)}>削除</button>
         </li>
       )),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [updateFiles]
   );
+
+  const onClickDelete = (index) => {
+    updateFiles.splice(index, 1);
+    setUpdateFiles([...updateFiles]);
+  };
+  const onClickUpload = () => {
+    alert("アップロードしました");
+    setUpdateFiles([]);
+  };
+  const onClickReset = () => {
+    setUpdateFiles([]);
+  };
 
   return (
     <>
@@ -85,6 +98,8 @@ export default function Dropzone() {
         <p>{dropText}</p>
       </Center>
       <ul>{files}</ul>
+      <button onClick={() => onClickUpload()}>アップロード</button>
+      <button onClick={() => onClickReset()}>リセット</button>
     </>
   );
 }
